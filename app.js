@@ -1,7 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
-const userRoutes = require("./routes/userRoutes");
+const userRoutes = require("./routes/userRoute");
 const emailRoutes = require("./routes/emailRoutes");
 
 mongoose.connect("mongodb://localhost:27017/mydatabase", {
