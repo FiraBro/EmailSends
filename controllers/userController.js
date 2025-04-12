@@ -138,5 +138,32 @@ exports.getAllUser = async (req, res, next) => {
         user: user,
       },
     });
-  } catch (error) {}
+  } catch (error) {
+    res.status(400).json({
+      status: "fail",
+      message: errror.message,
+    });
+  }
+};
+exports.getUser = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.params.id);
+    if (!user) {
+      return res.status(404).json({
+        status: "fail",
+        message: "User not found",
+      });
+    }
+    res.status(200).json({
+      status: "success",
+      data: user,
+    });
+  } catch (error) {
+    console.error(error); // Log error for debugging
+    res.status(500).json({
+      status: "fail",
+      message: "Failed to retrieve user",
+    });
+    next(error); // Pass error to next middleware
+  }
 };
